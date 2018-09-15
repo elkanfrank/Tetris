@@ -42,6 +42,9 @@ function controlPermission(direction){
   }
   return controlAllow;
 }
+ function lol(){
+   console.log('lol');
+ }
 
 // function rotatePermission(){
 //   nextRotation = [];
