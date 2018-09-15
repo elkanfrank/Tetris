@@ -43,12 +43,12 @@ function controlPermission(direction){
   return controlAllow;
 }
 
-function rotatePermission(){
-  nextRotation = [];
-  rotate(shapes[currentShape].blocks
+// function rotatePermission(){
+//   nextRotation = [];
+//   rotate(shapes[currentShape].blocks
 
-  if (rotate(shapes[currentShape].blocks))
-}
+//   if (rotate(shapes[currentShape].blocks))
+// }
 
 
 // Controls for shapes, also checks if shape is allowed to move L or R
