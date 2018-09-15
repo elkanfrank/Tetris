@@ -42,9 +42,6 @@ function controlPermission(direction){
   }
   return controlAllow;
 }
- function lol(){
-   console.log('lol');
- }
 
 // function rotatePermission(){
 //   nextRotation = [];
@@ -89,9 +86,7 @@ function partOfSelf(coordinateList, nextBlock){
   }
   if (comparison != 2){
     return false;
-  } 
-
-  HOI
+  }
 }
 
 
