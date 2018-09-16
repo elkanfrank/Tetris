@@ -44,10 +44,12 @@ function controlPermission(direction){
 }
 
 // function rotatePermission(){
-//   nextRotation = [];
-//   rotate(shapes[currentShape].blocks
+//   let nextRotation = rotateShape(shapes[currentShape].blocks);
 
-//   if (rotate(shapes[currentShape].blocks))
+//   for (let i = 0; i < nextRotation.length; i++){
+//     if (Matrix[nextRotation[i][0]][nextRotation[i][1]] == 1 && 
+//         nextRotation[i][])
+//   }
 // }
 
 
