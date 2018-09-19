@@ -8,7 +8,6 @@ function createMatrix() {
   }
 }
 
-
 function randShape(){
   return round(random(0, 6));
 }
@@ -43,14 +42,33 @@ function controlPermission(direction){
   return controlAllow;
 }
 
-// function rotatePermission(){
-//   let nextRotation = rotateShape(shapes[currentShape].blocks);
+function rotatePermission(coordList){
+  // Make copy of objects coordinates
+  let copyCoords = [];
+  for (let j = 0; j < coordList.length; j++){
+    copyCoords[j] = coordList[j].slice();
+  }
 
-//   for (let i = 0; i < nextRotation.length; i++){
-//     if (Matrix[nextRotation[i][0]][nextRotation[i][1]] == 1 && 
-//         nextRotation[i][])
-//   }
-// }
+  let nextRotation = rotateShape(copyCoords); // STORE NEXT ROTATION
+
+  // Add xPos and yPos
+  for (let i = 0; i < nextRotation.length; i++){
+    nextRotation[i][0] += shapes[currentShape].yPos;
+    nextRotation[i][1] += shapes[currentShape].xPos;
+  }
+
+  // TODO: if rotation occurs near the wall, move the shape +1 of -1 xPos to allow rotation
+  // to check if rotation is allowed, current shape cannot be drawn, because a lot of times currentshape has similar blocks to the next rotation
+  for (let k = 0; k < nextRotation.length; k++){
+    if (nextRotation[k][0] > 19 || nextRotation[k][0] < 0){
+      return false
+    }
+    if (nextRotation[k][1] > 9 || nextRotation[k][1] < 0){
+      return false
+    }
+  }
+  return true;
+}
 
 
 // Controls for shapes, also checks if shape is allowed to move L or R
@@ -65,19 +83,21 @@ function keyPressed(){
     }
   } else if (keyCode === UP_ARROW){
     // TODO: Add collision check before rotation occurs
-    shapes[currentShape].rotate();
+    if (rotatePermission(shapes[currentShape].blocks) === true){
+      shapes[currentShape].rotate();
+    }
   }
 }
 
 
 function partOfSelf(coordinateList, nextBlock){
-  // Takes in a block of a shape, and the block below it
-  // Returns true if that block is part of itself, otherwise returns false
+  // Takes in coordinates of a shape, and a block below it
+  // Returns true if that block is part of the shape itself, otherwise returns false
   let comparison = 0;
   for (let j = 0; j < coordinateList.length; j++){
     for (let i = 0; i < 2; i++){
       if (nextBlock[i] == coordinateList[j][i]){
-        comparison += 1
+        comparison += 1;
       }
     }
     if (comparison == 2){
@@ -106,8 +126,6 @@ function rotateShape(m){
     m[i][1] -= shapes[currentShape].xPos;
 
     if (i == 0) newCoordinates.push(m[i]);
-    // console.log("Current yPos: ", shapes[currentShape].yPos);
-    // console.log("Original yPos", m[i][0]);
 
     if (i > 0){
       // X' = (x - a) * cos(degrees) - (y - b) sin(degrees) + a
@@ -117,6 +135,6 @@ function rotateShape(m){
       newCoordinates.push([round(newY), round(newX)]);
     }
   }
-  // console.log(shapes[currentShape].type);
+
   return newCoordinates;
 }

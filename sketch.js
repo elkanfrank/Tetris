@@ -13,19 +13,21 @@ const ROWS = 20;
 const COLS = 10;
 const WIDTH = 210;
 const HEIGHT = 400;
-const SPEED = 200;
+const SPEED = 500;
 
 function renderFrame() {
   for (let i = 0; i < COLS; i++) {
     for (let j = 0; j < ROWS; j++) {
       if (Matrix[j][i] == 0){
         fill(100);
+        // noStroke();
         stroke(10, 50, 33);
         rect(i * (WIDTH / COLS), j * (HEIGHT / ROWS), WIDTH / COLS, HEIGHT / ROWS);
       }
       else {
         // lookup which shape every block belongs to and fill color accordingly
         fill(10, 50, 33);
+        // fill("#88aae2");
         rect(i * (WIDTH / COLS), j * (HEIGHT / ROWS), WIDTH / COLS, HEIGHT / ROWS);
       }
     }
@@ -36,7 +38,7 @@ function Shape(type){
   this.type = type;
   this.xPos = 3;
   this.yPos = 0;
-  // this.color = rgb(120);
+  this.color = red;
   this.rotation = false;
   this.isMoving = true;
   this.blocks = new Array(4);
@@ -165,6 +167,8 @@ function draw() {
   
   // Draw actual frame on canvas
   renderFrame();
+
+  console.log();
   
   // Check for game over 
   for (let i = 0; i < Matrix[0].length; i++){
