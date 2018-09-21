@@ -149,14 +149,14 @@ let shapes = [];
 let currentShape = 0;
 
 
-function setup() {
-  colorMode(RGB, 100, 100, 100);
-  createCanvas(WIDTH + 1, HEIGHT + 1);
-  createMatrix();
-  frameRate(30);
-  renderFrame();
-  shapes.push(new Shape(shapetypes[randShape()]));
-}
+// function setup() {
+//   colorMode(RGB, 100, 100, 100);
+//   createCanvas(WIDTH + 1, HEIGHT + 1);
+//   createMatrix();
+//   frameRate(30);
+//   renderFrame();
+//   shapes.push(new Shape(shapetypes[randShape()]));
+// }
 
 // Start initial timer
 let moveTimer = setInterval(function(){shapes[currentShape].moveDown()}, SPEED);
