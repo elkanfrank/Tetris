@@ -13,7 +13,7 @@ const ROWS = 20;
 const COLS = 10;
 const WIDTH = 210;
 const HEIGHT = 400;
-const SPEED = 500;
+const SPEED = 300;
 
 function renderFrame() {
   for (let i = 0; i < COLS; i++) {
@@ -38,49 +38,56 @@ function Shape(type){
   this.type = type;
   this.xPos = 3;
   this.yPos = 0;
-  this.color = red;
+  this.color = null;
   this.rotation = false;
   this.isMoving = true;
   this.blocks = new Array(4);
   
   this.drawShape = function(){
     if (this.type == "triangle"){
+      this.color = "#108153" // green
       this.blocks[0] = [this.yPos, this.xPos + 1]; // Origin
       this.blocks[1] = [this.yPos, this.xPos];
       this.blocks[2] = [this.yPos, this.xPos + 2];
       this.blocks[3] = [this.yPos + 1, this.xPos + 1];
     }
     if (this.type == "square"){
+      this.color = "#C9E4CA" // green
       this.blocks[0] = [this.yPos, this.xPos];
       this.blocks[1] = [this.yPos, this.xPos + 1];
       this.blocks[2] = [this.yPos + 1, this.xPos];
       this.blocks[3] = [this.yPos + 1, this.xPos + 1];
     }
     if (this.type == "pipe"){
+      this.color = "#69D1C5" // green
       this.blocks[0] = [this.yPos + 1, this.xPos]; // Origin
       this.blocks[1] = [this.yPos, this.xPos];
       this.blocks[2] = [this.yPos + 2, this.xPos];
       this.blocks[3] = [this.yPos + 3, this.xPos];
     }
     if (this.type == "worm1"){
+      this.color = "#7EBCE6" // green
       this.blocks[0] = [this.yPos + 1, this.xPos]; // Origin
       this.blocks[1] = [this.yPos, this.xPos];
       this.blocks[2] = [this.yPos + 1, this.xPos + 1];
       this.blocks[3] = [this.yPos + 2, this.xPos + 1];
     }
     if (this.type == "worm2"){
+      this.color = "#8980F5" // green
       this.blocks[0] = [this.yPos + 1, this.xPos]; // Origin
       this.blocks[1] = [this.yPos + 1, this.xPos + 1];
       this.blocks[2] = [this.yPos, this.xPos + 1];
       this.blocks[3] = [this.yPos + 2, this.xPos];
     }
     if (this.type == "boot1"){
+      this.color = "#0A2E36" // green
       this.blocks[0] = [this.yPos + 2, this.xPos]; // Origin
       this.blocks[1] = [this.yPos + 2, this.xPos + 1];
       this.blocks[2] = [this.yPos + 1, this.xPos];
       this.blocks[3] = [this.yPos, this.xPos];
     }
     if (this.type == "boot2"){
+      this.color = "#E75A7C" // green
       this.blocks[0] = [this.yPos + 2, this.xPos + 1]; // Origin
       this.blocks[1] = [this.yPos + 2, this.xPos];
       this.blocks[2] = [this.yPos + 1, this.xPos + 1];
@@ -180,7 +187,7 @@ function draw() {
       break;
     }
   }
-
+  
   // If shape stopped moving, create new shape
   if (!shapes[currentShape].isMoving){
     clearInterval(moveTimer);
