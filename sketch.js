@@ -20,16 +20,16 @@ function renderFrame() {
     for (let j = 0; j < ROWS; j++) {
       if (Matrix[j][i] == 0){
         fill(100);
-        // noStroke();
-        stroke(10, 50, 33);
+        stroke(90);
         rect(i * (WIDTH / COLS), j * (HEIGHT / ROWS), WIDTH / COLS, HEIGHT / ROWS);
       }
-      else {
-        // lookup which shape every block belongs to and fill color accordingly
-        fill(10, 50, 33);
-        // fill("#88aae2");
-        rect(i * (WIDTH / COLS), j * (HEIGHT / ROWS), WIDTH / COLS, HEIGHT / ROWS);
-      }
+    }
+  }
+  for (let shape of shapes){
+    for (let k = 0; k < shape.blocks.length; k++){
+      fill(shape.color);
+      stroke(shape.color);
+      rect(shape.blocks[k][1] * (WIDTH / COLS), shape.blocks[k][0] * (HEIGHT / ROWS), WIDTH / COLS, HEIGHT / ROWS);
     }
   }
 }
@@ -45,49 +45,49 @@ function Shape(type){
   
   this.drawShape = function(){
     if (this.type == "triangle"){
-      this.color = "#108153" // green
+      this.color = "#108153"; // green
       this.blocks[0] = [this.yPos, this.xPos + 1]; // Origin
       this.blocks[1] = [this.yPos, this.xPos];
       this.blocks[2] = [this.yPos, this.xPos + 2];
       this.blocks[3] = [this.yPos + 1, this.xPos + 1];
     }
     if (this.type == "square"){
-      this.color = "#C9E4CA" // green
+      this.color = "#C9E4CA"; // green
       this.blocks[0] = [this.yPos, this.xPos];
       this.blocks[1] = [this.yPos, this.xPos + 1];
       this.blocks[2] = [this.yPos + 1, this.xPos];
       this.blocks[3] = [this.yPos + 1, this.xPos + 1];
     }
     if (this.type == "pipe"){
-      this.color = "#69D1C5" // green
+      this.color = "#69D1C5"; // green
       this.blocks[0] = [this.yPos + 1, this.xPos]; // Origin
       this.blocks[1] = [this.yPos, this.xPos];
       this.blocks[2] = [this.yPos + 2, this.xPos];
       this.blocks[3] = [this.yPos + 3, this.xPos];
     }
     if (this.type == "worm1"){
-      this.color = "#7EBCE6" // green
+      this.color = "#7EBCE6"; // green
       this.blocks[0] = [this.yPos + 1, this.xPos]; // Origin
       this.blocks[1] = [this.yPos, this.xPos];
       this.blocks[2] = [this.yPos + 1, this.xPos + 1];
       this.blocks[3] = [this.yPos + 2, this.xPos + 1];
     }
     if (this.type == "worm2"){
-      this.color = "#8980F5" // green
+      this.color = "#8980F5"; // green
       this.blocks[0] = [this.yPos + 1, this.xPos]; // Origin
       this.blocks[1] = [this.yPos + 1, this.xPos + 1];
       this.blocks[2] = [this.yPos, this.xPos + 1];
       this.blocks[3] = [this.yPos + 2, this.xPos];
     }
     if (this.type == "boot1"){
-      this.color = "#0A2E36" // green
+      this.color = "#0A2E36"; // green
       this.blocks[0] = [this.yPos + 2, this.xPos]; // Origin
       this.blocks[1] = [this.yPos + 2, this.xPos + 1];
       this.blocks[2] = [this.yPos + 1, this.xPos];
       this.blocks[3] = [this.yPos, this.xPos];
     }
     if (this.type == "boot2"){
-      this.color = "#E75A7C" // green
+      this.color = "#E75A7C"; // green
       this.blocks[0] = [this.yPos + 2, this.xPos + 1]; // Origin
       this.blocks[1] = [this.yPos + 2, this.xPos];
       this.blocks[2] = [this.yPos + 1, this.xPos + 1];
@@ -149,14 +149,15 @@ let shapes = [];
 let currentShape = 0;
 
 
-// function setup() {
-//   colorMode(RGB, 100, 100, 100);
-//   createCanvas(WIDTH + 1, HEIGHT + 1);
-//   createMatrix();
-//   frameRate(30);
-//   renderFrame();
-//   shapes.push(new Shape(shapetypes[randShape()]));
-// }
+function setup() {
+  colorMode(RGB, 100, 100, 100);
+  stroke(100);
+  createCanvas(WIDTH + 1, HEIGHT + 1);
+  createMatrix();
+  frameRate(30);
+  renderFrame();
+  shapes.push(new Shape(shapetypes[randShape()]));
+}
 
 // Start initial timer
 let moveTimer = setInterval(function(){shapes[currentShape].moveDown()}, SPEED);
