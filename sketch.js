@@ -1,10 +1,10 @@
 // TETRIS
 
-// TODO: Let each shape have it's own color > consider moving the drawing of shapes from renderFrame to the object itself
 // TODO: Make bottom row disappear when its full and shift everything down
-// TODO: When rotating near the edge, add xPos +1 or -1 to prevent going through the wall
 // TODO: When rotating near another piece, add yPos + 1 to prevent going through a piece
 // TODO: When a new shape spawns, it should check first whether no other shape is in the way. If it IS, it's game over
+// TODO: Map down arrow to double/triple speed of shape
+// TODO: Add game over screen
 
 
 let Matrix = [[]];
@@ -16,19 +16,20 @@ const HEIGHT = 400;
 const SPEED = 300;
 
 function renderFrame() {
+  // Draw grid
   for (let i = 0; i < COLS; i++) {
     for (let j = 0; j < ROWS; j++) {
-      if (Matrix[j][i] == 0){
-        fill(100);
-        stroke(90);
-        rect(i * (WIDTH / COLS), j * (HEIGHT / ROWS), WIDTH / COLS, HEIGHT / ROWS);
-      }
+      fill(100);
+      stroke(90);
+      rect(i * (WIDTH / COLS), j * (HEIGHT / ROWS), WIDTH / COLS, HEIGHT / ROWS);
     }
   }
+
+  // Draw blocks
   for (let shape of shapes){
     for (let k = 0; k < shape.blocks.length; k++){
       fill(shape.color);
-      stroke(shape.color);
+      // stroke(shape.color);
       rect(shape.blocks[k][1] * (WIDTH / COLS), shape.blocks[k][0] * (HEIGHT / ROWS), WIDTH / COLS, HEIGHT / ROWS);
     }
   }
@@ -162,10 +163,9 @@ function setup() {
 // Start initial timer
 let moveTimer = setInterval(function(){shapes[currentShape].moveDown()}, SPEED);
 
+
 function draw() {
   background(200);
-  
-  // Reset matrix to all zero's
   updateMatrix();
   
   // Draw shapes (put 1's in Matrix)
@@ -173,10 +173,7 @@ function draw() {
     shapes[i].drawShape();
   }
   
-  // Draw actual frame on canvas
   renderFrame();
-
-  console.log();
   
   // Check for game over 
   for (let i = 0; i < Matrix[0].length; i++){
